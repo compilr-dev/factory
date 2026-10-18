@@ -30,8 +30,8 @@ The factory takes an **Application Model** — a declarative description of what
 - **Auto-Inverse Relationships** — adding `belongsTo` auto-creates `hasMany` on target
 - **Cascading Operations** — renaming an entity updates all relationship targets
 - **Validation** — comprehensive model health checks with actionable error messages
-- **Toolkit Registry** — extensible generator system (React+Node built-in)
-- **5 Agent Tools** — model CRUD, validation, scaffolding, toolkit listing
+- **Toolkit Registry** — extensible generator system (react-node, next-prisma, react-fastapi, react-go, static-landing built in)
+- **29 Agent Tools** — get/update/validate for six model families (application, business, brand, research, curriculum, book) plus four scaffolders and toolkit listing. `createSoftwareFactoryTools()` gives you just the five software ones
 - **1 Skill** — guided scaffolding workflow for AI agents
 - **Full Color Palette** — auto-generates 50–950 Tailwind shades from single hex
 - **Implicit Timestamps** — `createdAt`/`updatedAt` on all entity records
@@ -42,11 +42,7 @@ The factory takes an **Application Model** — a declarative description of what
 npm install @compilr-dev/factory
 ```
 
-Peer dependency:
-
-```bash
-npm install @compilr-dev/sdk
-```
+`@compilr-dev/sdk` is a dependency and is installed with it — you do not need to add it yourself.
 
 ## Quick Start
 
@@ -88,14 +84,19 @@ const result = validateModel(updated);
 ### Agent Tools
 
 ```typescript
-import { createModelTools, createFactoryTools } from '@compilr-dev/factory';
+import { createModelTools, createFactoryTools, createAllFactoryTools } from '@compilr-dev/factory';
 import type { PlatformContext } from '@compilr-dev/sdk';
 
-// 3 model tools (get, update, validate)
+// 3 application-model tools (get, update, validate)
 const modelTools = createModelTools({ context: platformContext });
 
-// 2 factory tools (scaffold, list-toolkits)
+// the same 3 plus factory_scaffold and factory_list_toolkits — 5 in all, so
+// register these INSTEAD of modelTools, not alongside them
 const factoryTools = createFactoryTools({ context: platformContext });
+
+// every model family (application, business, brand, research, curriculum, book)
+// with its scaffolders — 29 tools
+const allTools = createAllFactoryTools({ context: platformContext });
 ```
 
 ## Agent Tools Reference
@@ -175,14 +176,14 @@ Generates a complete full-stack application:
 npm run build          # Compile TypeScript
 npm run lint           # ESLint (strict, 0 errors required)
 npm run format:check   # Prettier check
-npm test -- --run      # Run 290 tests
+npm test -- --run      # Run 738 tests
 npm run typecheck      # Type-check without emitting
 ```
 
 ## Requirements
 
 - **Node.js** 18 or higher
-- **@compilr-dev/sdk** ^0.1.12 (peer dependency)
+- **@compilr-dev/sdk** ^0.44.3 (dependency — installed for you)
 
 ## Related Packages
 
